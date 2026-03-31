@@ -1,0 +1,9 @@
+# aws-cdk-lib 2.245.0 is the last version compatible with aws-cdk-cloud-assembly-schema<54.0.0
+# aws-solutions-constructs 2.100.1+ requires schema>=50.3.0,<51.0.0, which conflicts with newer CDK versions
+# Using aws-cdk-lib==2.245.0 which works with the solution constructs
+aws-cdk-lib==2.245.0
+constructs>=10.5.0,<11.0.0
+boto3>=1.28.0,<2.0.0
+# aws-solutions-constructs 2.100.1+ uses newer CDK assembly schema that conflicts with older CDK versions
+# Using a version compatible with the available schema versions
+aws_solutions_constructs.aws_lambda_dynamodb>=2.39.0,<3.0.0
