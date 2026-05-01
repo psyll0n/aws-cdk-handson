@@ -1,65 +1,117 @@
+# starter\_cdk\_app — Basic CDK Starter
 
-# Welcome to your CDK Python project!
+A minimal AWS CDK application written in Python that demonstrates the standard project scaffold and basic AWS messaging resources. This is the entry point for the repository — start here if you are new to the AWS CDK.
 
-You should explore the contents of this project. It demonstrates a CDK app with an instance of a stack (`starter_cdk_app_stack`)
-which contains an Amazon SQS queue that is subscribed to an Amazon SNS topic.
+---
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+## What You Will Learn
 
-This project is set up like a standard Python project.  The initialization process also creates
-a virtualenv within this project, stored under the .venv directory.  To create the virtualenv
-it assumes that there is a `python3` executable in your path with access to the `venv` package.
-If for any reason the automatic creation of the virtualenv fails, you can create the virtualenv
-manually once the init process completes.
+- The anatomy of a CDK Python project (`app.py`, stack file, `cdk.json`)
+- How to define AWS resources using CDK constructs
+- How to wire two constructs together (SNS → SQS subscription)
+- The CDK workflow: `synth` → `bootstrap` → `deploy` → `destroy`
 
-To manually create a virtualenv on MacOS and Linux:
+---
 
-```
-$ python3 -m venv .venv
-```
-
-After the init process completes and the virtualenv is created, you can use the following
-step to activate your virtualenv.
+## Architecture
 
 ```
-$ source .venv/bin/activate
+┌──────────────────────────────────────┐
+│  StarterCdkAppStack                  │
+│                                      │
+│  ┌───────────────┐    subscribes     │
+│  │   SNS Topic   │ ────────────────► │
+│  └───────────────┘                   │
+│                        ┌───────────┐ │
+│                        │ SQS Queue │ │
+│                        │ (300 s    │ │
+│                        │ visibility│ │
+│                        │ timeout)  │ │
+│                        └───────────┘ │
+└──────────────────────────────────────┘
 ```
 
-If you are a Windows platform, you would activate the virtualenv like this:
+---
+
+## AWS Resources Created
+
+| Resource | Name / ID | Notes |
+|---|---|---|
+| SQS Queue | `StarterCdkAppQueue` | Visibility timeout: 300 seconds |
+| SNS Topic | `StarterCdkAppTopic` | Subscribed to the SQS queue above |
+
+---
+
+## Project Structure
 
 ```
-% .venv\Scripts\activate.bat
+starter_cdk_app/
+├── app.py                                      # CDK application entry point
+├── cdk.json                                    # CDK toolkit configuration
+├── requirements.txt                            # Runtime dependencies
+├── requirements-dev.txt                        # Dev/test dependencies
+├── source.bat                                  # Windows venv helper
+└── starter_cdk_app/
+    ├── __init__.py
+    └── starter_cdk_app_stack.py                # Stack: SNS topic + SQS queue
 ```
 
-Once the virtualenv is activated, you can install the required dependencies.
+---
 
+## Prerequisites
+
+- Python 3.8+
+- Node.js (required by the CDK CLI)
+- AWS CDK CLI — `npm install -g aws-cdk`
+- AWS credentials configured (`aws configure` or environment variables)
+
+---
+
+## Setup & Deployment
+
+```bash
+# 1. Navigate into this project
+cd starter_cdk_app
+
+# 2. Create and activate a virtual environment
+python3 -m venv .venv
+source .venv/bin/activate        # Linux / macOS
+# .venv\Scripts\activate.bat     # Windows
+
+# 3. Install dependencies
+pip install -r requirements.txt
+
+# 4. Bootstrap your AWS environment (first time only, per account/region)
+cdk bootstrap
+
+# 5. Preview the CloudFormation template
+cdk synth
+
+# 6. Deploy to AWS
+cdk deploy
+
+# 7. Tear down all resources when done
+cdk destroy
 ```
-$ pip install -r requirements.txt
-```
 
-At this point you can now synthesize the CloudFormation template for this code.
+---
 
-```
-$ cdk synth
-```
+## Key Concepts
 
-You can now begin exploring the source code, contained in the hello directory.
-There is also a very trivial test included that can be run like this:
+| Concept | Description |
+|---|---|
+| `Stack` | A deployable unit of CloudFormation resources |
+| `sqs.Queue` | L2 construct that creates an SQS queue with sensible defaults |
+| `sns.Topic` | L2 construct that creates an SNS topic |
+| `SqsSubscription` | Wires an SNS topic to deliver messages into an SQS queue |
 
-```
-$ pytest
-```
+---
 
-To add additional dependencies, for example other CDK libraries, just add to
-your requirements.txt file and rerun the `pip install -r requirements.txt`
-command.
+## Related Projects
 
-## Useful commands
+← Back to the [repository root](../README.md)
 
- * `cdk ls`          list all stacks in the app
- * `cdk synth`       emits the synthesized CloudFormation template
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk docs`        open CDK documentation
-
-Enjoy!
+| Next step | Project |
+|---|---|
+| VPC with raw CloudFormation resources | [`l1_cdk_constructs`](../l1_cdk_constructs/README.md) |
+| VPC with high-level constructs | [`l2_cdk_constructs`](../l2_cdk_constructs/README.md) |
