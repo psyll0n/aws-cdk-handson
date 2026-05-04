@@ -1,4 +1,4 @@
-# cdk-aspects — Custom CDK Aspects for Compliance & Governance
+# cdk\_aspects — Custom CDK Aspects for Compliance & Governance
 
 Introduces **CDK Aspects** — a powerful mechanism that lets you visit every node in the CDK construct tree and inspect, annotate, or mutate resources at synthesis time. This project implements a custom `EC2InstanceTypeChecker` aspect that enforces an allowed list of EC2 instance types across an entire stack, and combines it with the nested-stack architecture and tagging patterns from earlier projects.
 
@@ -60,7 +60,7 @@ app.py
 ## Project Structure
 
 ```
-cdk-aspects/
+cdk_aspects/
 ├── app.py                                      # Entry point: stacks, aspect attachment, tagging
 ├── cdk.json                                    # CDK toolkit configuration
 ├── requirements.txt                            # Runtime dependencies
@@ -160,7 +160,7 @@ See [`cdk-stack-tagging`](../cdk-stack-tagging/README.md) for a full breakdown o
 
 ```bash
 # 1. Navigate into this project
-cd cdk-aspects
+cd cdk_aspects
 
 # 2. Create and activate a virtual environment
 python3 -m venv .venv

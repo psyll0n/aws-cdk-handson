@@ -1,4 +1,4 @@
-# cdk-stack-tagging — CDK Stack & Resource Tagging
+# cdk\_stack\_tagging — CDK Stack & Resource Tagging
 
 Builds on the [`cdk_multi_stacks`](../cdk_multi_stacks/README.md) architecture to demonstrate all the ways CDK can apply, override, prioritise, and remove **AWS resource tags** — both at the stack level and at the individual resource level.
 
@@ -67,7 +67,7 @@ Same EC2/NGINX infrastructure as `cdk_multi_stacks/application_stack.py`, extend
 ## Project Structure
 
 ```
-cdk-stack-tagging/
+cdk_stack_tagging/
 ├── app.py                                      # Entry point: stacks + stack-level tagging
 ├── cdk.json                                    # CDK toolkit configuration
 ├── requirements.txt                            # Runtime dependencies
@@ -144,7 +144,7 @@ When two rules assign the **same tag key** to the same resource, the rule with t
 
 ```bash
 # 1. Navigate into this project
-cd cdk-stack-tagging
+cd cdk_stack_tagging
 
 # 2. Create and activate a virtual environment
 python3 -m venv .venv

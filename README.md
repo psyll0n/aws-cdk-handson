@@ -25,8 +25,11 @@ Networking & Compute
 Multi-Stack Patterns
   └─► cdk_multi_stacks      Two independent stacks with cross-stack VPC reference
   └─► cdk_nested_stacks     Same architecture using CDK NestedStack
-  └─► cdk-stack-tagging     Stack & resource tagging (priority, include/exclude, remove)
-  └─► cdk-aspects           Custom CDK Aspects for synthesis-time compliance & governance
+  └─► cdk_stack_tagging     Stack & resource tagging (priority, include/exclude, remove)
+  └─► cdk_aspects           Custom CDK Aspects for synthesis-time compliance & governance
+
+Testing
+  └─► cdk_testing           CDK unit testing with aws-cdk.assertions
 ```
 
 ---
@@ -44,8 +47,9 @@ Multi-Stack Patterns
 | 7 | [**cdk\_s3\_assets**](cdk_s3_assets/README.md) | Deploy a local HTML file to EC2 via CDK S3 assets and user data | VPC, EC2, S3 |
 | 8 | [**cdk\_multi\_stacks**](cdk_multi_stacks/README.md) | Split infrastructure into two independent stacks sharing a VPC (cross-stack ref) | VPC, EC2, S3 |
 | 9 | [**cdk\_nested\_stacks**](cdk_nested_stacks/README.md) | Same two-stack architecture using `NestedStack` inside one root stack | VPC, EC2, S3 |
-| 10 | [**cdk-stack-tagging**](cdk-stack-tagging/README.md) | Apply, prioritise, include/exclude, and remove AWS tags at stack and resource level | VPC, EC2, S3 |
-| 11 | [**cdk-aspects**](cdk-aspects/README.md) | Custom `IAspect` that enforces EC2 instance types, emits warnings, and auto-corrects at synthesis time | VPC, EC2, S3 |
+| 10 | [**cdk\_stack\_tagging**](cdk_stack_tagging/README.md) | Apply, prioritise, include/exclude, and remove AWS tags at stack and resource level | VPC, EC2, S3 |
+| 11 | [**cdk\_aspects**](cdk_aspects/README.md) | Custom `IAspect` that enforces EC2 instance types, emits warnings, and auto-corrects at synthesis time | VPC, EC2, S3 |
+| 12 | [**cdk\_testing**](cdk_testing/README.md) | CDK unit tests with `aws_cdk.assertions`: resource counts, property assertions, and `Match` helpers | VPC, EC2, S3 |
 
 ---
 
@@ -62,8 +66,9 @@ aws-cdk-handson/
 ├── cdk_s3_assets/          #  7 — Deploying static files to EC2 via S3 assets
 ├── cdk_multi_stacks/       #  8 — Infrastructure split across multiple CDK stacks
 ├── cdk_nested_stacks/      #  9 — Infrastructure using CDK nested stacks
-├── cdk-stack-tagging/      # 10 — Stack and resource tagging patterns
-└── cdk-aspects/            # 11 — Custom CDK Aspects for compliance & governance
+├── cdk_stack_tagging/      # 10 — Stack and resource tagging patterns
+├── cdk_aspects/            # 11 — Custom CDK Aspects for compliance & governance
+└── cdk_testing/            # 12 — CDK unit testing with aws-cdk.assertions
 ```
 
 ---
